@@ -13,20 +13,30 @@ const Nav = () => {
   };
 
   return (
-    <nav>
-      <ul className="list-unstyled d-flex gap-3">
-        <li className="text-decoration-none">
-          <NavLink to={"/"}>Home</NavLink>
-        </li>
-
-        {auth.isLoggedIn && (
-          <li>
-            <button onClick={logOutHandler} className="btn btn-danger btn-sm">
-              Log out
-            </button>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light px-3 rounded shadow-sm">
+      <div className="container-fluid">
+        <NavLink to="/" className="navbar-brand fw-bold text-primary">
+          MyApp
+        </NavLink>
+        <ul className="navbar-nav ms-auto d-flex align-items-center gap-3 flex-row">
+          <li className="nav-item">
+            <NavLink to="/" className="nav-link">
+              Home
+            </NavLink>
           </li>
-        )}
-      </ul>
+
+          {auth.isLoggedIn && (
+            <li className="nav-item">
+              <button
+                onClick={logOutHandler}
+                className="btn btn-outline-danger btn-sm"
+              >
+                Log out
+              </button>
+            </li>
+          )}
+        </ul>
+      </div>
     </nav>
   );
 };

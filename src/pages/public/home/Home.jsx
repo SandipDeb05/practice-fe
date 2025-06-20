@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router";
 import { useGetPostLists } from "../../../query/queryHooks/homeQueries";
+import PostLists from "./components/PostLists";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -9,25 +10,29 @@ const Home = () => {
     navigate("/admin/dashboard");
   };
 
-  console.log(postLists);
-
   return (
-    <div>
-      <h2>Home Page</h2>
+    <div className="container py-5">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <button
+          className="btn btn-outline-primary btn-sm"
+          onClick={switchToAdminHandler}
+        >
+          Switch to Admin
+        </button>
+      </div>
+
       {isPostListLoading ? (
-        <p>Loading...</p>
-      ) : !isPostListLoading && postLists?.length > 0 ? (
-        <div>
-          {postLists.map((post) => {
-            return <h6 key={post.id}>{post.title}</h6>;
-          })}
+        <div className="text-center my-5">
+          <div className="spinner-border text-primary" role="status" />
+          <p className="mt-3">Loading posts...</p>
         </div>
+      ) : postLists?.length > 0 ? (
+        <PostLists posts={postLists} />
       ) : (
-        <p>No post</p>
+        <div className="alert alert-warning" role="alert">
+          No posts available at the moment.
+        </div>
       )}
-      <button className="btn btn-primary btn-sm" onClick={switchToAdminHandler}>
-        Switch to admin
-      </button>
     </div>
   );
 };

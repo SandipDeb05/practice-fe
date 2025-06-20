@@ -1,10 +1,104 @@
 {
   "posts": [
-    { "id": "1", "title": "1 title", "views": 100 },
-    { "id": "2", "title": "2 title", "views": 200 },
-    { "id": "3", "title": "3 title", "views": 200 },
-    { "id": "4", "title": "4 title", "views": 200 },
-    { "id": "5", "title": "5 title", "views": 200 },
-    { "id": "6", "title": "6 title", "views": 200 }
+    {
+      "id": 1,
+      "title": "Understanding React Hooks",
+      "content": "Hooks let you use state and other React features without writing a class.",
+      "author": "Jane Doe",
+      "createdAt": "2025-06-20T10:00:00Z",
+      "tags": ["React", "Hooks", "JavaScript"],
+      "likes": 24,
+      "commentsCount": 5
+    },
+    {
+      "id": 2,
+      "title": "Node.js Event Loop Explained",
+      "content": "The event loop enables non-blocking I/O by offloading operations to the system kernel.",
+      "author": "John Smith",
+      "createdAt": "2025-06-19T14:30:00Z",
+      "tags": ["Node.js", "Backend", "Concurrency"],
+      "likes": 35,
+      "commentsCount": 8
+    },
+    {
+      "id": 3,
+      "title": "Mastering Flexbox",
+      "content": "Flexbox makes layout design more efficient and responsive in one dimension.",
+      "author": "Emily Zhang",
+      "createdAt": "2025-06-18T09:15:00Z",
+      "tags": ["CSS", "Flexbox", "Design"],
+      "likes": 18,
+      "commentsCount": 3
+    },
+    {
+      "id": 4,
+      "title": "Intro to TypeScript",
+      "content": "TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.",
+      "author": "Michael Lee",
+      "createdAt": "2025-06-17T11:00:00Z",
+      "tags": ["TypeScript", "JavaScript", "Frontend"],
+      "likes": 42,
+      "commentsCount": 10
+    },
+    {
+      "id": 5,
+      "title": "Handling State in Redux",
+      "content": "Redux centralizes state and logic for predictable behavior across components.",
+      "author": "Sara Ali",
+      "createdAt": "2025-06-16T16:45:00Z",
+      "tags": ["Redux", "State Management", "React"],
+      "likes": 28,
+      "commentsCount": 6
+    },
+    {
+      "id": 6,
+      "title": "Using React Query for Data Fetching",
+      "content": "React Query simplifies fetching, caching, and updating server state.",
+      "author": "Tom Brooks",
+      "createdAt": "2025-06-15T13:20:00Z",
+      "tags": ["React Query", "API", "React"],
+      "likes": 39,
+      "commentsCount": 9
+    },
+    {
+      "id": 7,
+      "title": "Next.js App Routing Guide",
+      "content": "Next.js supports file-based routing, dynamic routes, and nested layouts.",
+      "author": "Nina Patel",
+      "createdAt": "2025-06-14T08:10:00Z",
+      "tags": ["Next.js", "Routing", "SSR"],
+      "likes": 33,
+      "commentsCount": 7
+    },
+    {
+      "id": 8,
+      "title": "Responsive Design Best Practices",
+      "content": "Responsive design ensures your app looks great on all screen sizes.",
+      "author": "Alex Kim",
+      "createdAt": "2025-06-13T12:00:00Z",
+      "tags": ["CSS", "Mobile", "Frontend"],
+      "likes": 26,
+      "commentsCount": 4
+    },
+    {
+      "id": 9,
+      "title": "Deploying with Vercel",
+      "content": "Vercel offers seamless deployment for Next.js and frontend projects.",
+      "author": "Leah Green",
+      "createdAt": "2025-06-12T10:40:00Z",
+      "tags": ["Vercel", "Deployment", "Next.js"],
+      "likes": 20,
+      "commentsCount": 2
+    },
+    {
+      "id": 10,
+      "title": "Dark Mode in React",
+      "content": "Implementing dark mode improves user accessibility and experience.",
+      "author": "Omar Faruk",
+      "createdAt": "2025-06-11T07:50:00Z",
+      "tags": ["React", "UI", "Accessibility"],
+      "likes": 31,
+      "commentsCount": 5
+    }
   ]
 }
