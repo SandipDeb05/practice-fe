@@ -13,10 +13,10 @@ const AppRoutes = [
         index: true,
         Component: Home,
       },
-      {
-        path: "sign-in",
-        Component: SignIn,
-      },
+      // {
+      //   path: "sign-in",
+      //   Component: SignIn,
+      // },
     ],
   },
   {

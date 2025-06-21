@@ -1,18 +1,34 @@
 import { useSelector } from "react-redux";
 import { authSelector } from "../../../store/auth/selector";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Dashboard = () => {
-  const auth = useSelector(authSelector);
+  const { user, isAuthenticated, isLoading } = useAuth0();
+
+  if (isLoading) {
+    return <div className="container py-5">Loading...</div>;
+  }
 
   return (
     <div className="container py-5">
-      {auth.isLoggedIn ? (
+      {isAuthenticated ? (
         <div className="alert alert-success shadow-sm" role="alert">
-          <h4 className="alert-heading">Welcome back!</h4>
-          <p className="mb-0">
-            Hello, <strong>{auth.user?.email}</strong>. You're logged in to the
-            admin dashboard.
-          </p>
+          <div className="d-flex align-items-center">
+            <img
+              src={user?.picture}
+              alt="User Avatar"
+              className="rounded-circle me-3"
+              width={60}
+              height={60}
+            />
+            <div>
+              <h4 className="alert-heading mb-1">Welcome back!</h4>
+              <p className="mb-0">
+                Hello, <strong>{user?.name}</strong> (<code>{user?.email}</code>
+                ).
+              </p>
+            </div>
+          </div>
         </div>
       ) : (
         <div className="alert alert-warning" role="alert">

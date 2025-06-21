@@ -14,11 +14,6 @@ const PrivateLayout = () => {
   useEffect(() => {
     const userDetials = JSON.parse(localStorage.getItem("user_details"));
     if (userDetials) dispatch(loggedIn(userDetials));
-
-    if (!userDetials?.token) {
-      navigate("/sign-in");
-      return;
-    }
   }, [auth.isLoggedIn]);
 
   return (
