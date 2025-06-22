@@ -3,6 +3,7 @@ import PublicLayout from "../layouts/PublicLayout";
 import PrivateLayout from "../layouts/PrivateLayout";
 import SignIn from "../pages/public/authentication/SignIn";
 import Dashboard from "../pages/private/dashboard/Dashboard";
+import PageNotFound from "../pages/public/PageNotFound";
 
 const AppRoutes = [
   {
@@ -13,10 +14,6 @@ const AppRoutes = [
         index: true,
         Component: Home,
       },
-      // {
-      //   path: "sign-in",
-      //   Component: SignIn,
-      // },
     ],
   },
   {
@@ -31,9 +28,13 @@ const AppRoutes = [
   },
   {
     path: "*",
-    Component: function () {
-      return <h4>Page Not Found</h4>;
-    },
+    Component: PublicLayout,
+    children: [
+      {
+        path: "*",
+        Component: PageNotFound,
+      },
+    ],
   },
 ];
 

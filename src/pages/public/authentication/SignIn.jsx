@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authSelector } from "../../../store/auth/selector";
 import { loggedIn, loggedOut } from "../../../store/auth/actions";
-import { useNavigate } from "react-router"; // Make sure to use react-router-dom
+import { useNavigate } from "react-router";
 
 const SignIn = () => {
   const [userCredentials, setUserCredentials] = useState({

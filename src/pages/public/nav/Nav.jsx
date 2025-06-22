@@ -46,7 +46,7 @@ const Nav = () => {
     <nav className="navbar navbar-expand-lg navbar-light bg-light px-3 rounded shadow-sm">
       <div className="container-fluid">
         <NavLink to="/" className="navbar-brand fw-bold text-primary">
-          MyApp
+          Hacker News
         </NavLink>
         <ul className="navbar-nav ms-auto d-flex align-items-center gap-3 flex-row">
           <li className="nav-item">
