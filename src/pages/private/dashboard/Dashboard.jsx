@@ -22,7 +22,8 @@ const Dashboard = () => {
             <div>
               <h4 className="alert-heading mb-1">Welcome back!</h4>
               <p className="mb-0">
-                Hello, <strong>{user?.name}</strong> (<code>{user?.email}</code>
+                Hello, <strong>{user?.nickname}</strong> (
+                <code>{user?.email}</code>
                 ).
               </p>
             </div>

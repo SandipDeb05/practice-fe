@@ -7,3 +7,9 @@ const ROLES = {
 function hasAccess(user, permission) {
   return ROLES[user.role].includes(permission);
 }
+
+const user = {
+  role: "admin",
+};
+
+console.log(hasAccess(user, "view:posts"));

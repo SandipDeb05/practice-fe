@@ -280,7 +280,6 @@ const PrivateLayout = () => {
 
             <ListItem disablePadding sx={{ display: "block" }}>
               <ListItemButton
-                ton
                 sx={[
                   {
                     minHeight: 48,
