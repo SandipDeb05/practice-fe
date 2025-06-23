@@ -1,4 +1,4 @@
-const parts = "Subject, Action, Resource, Other Information (Env, Org, etc)";
+// const parts = "Subject, Action, Resource, Other Information (Env, Org, etc)";
 
 const user = {
   role: "doctor",

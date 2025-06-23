@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { authSelector } from "../../../store/auth/selector";
 import { loggedIn, loggedOut } from "../../../store/auth/actions";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -7,6 +7,8 @@ import { useEffect } from "react";
 
 const Nav = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const {
     user,
     isAuthenticated,
@@ -49,9 +51,9 @@ const Nav = () => {
           Hacker News
         </NavLink>
         <ul className="navbar-nav ms-auto d-flex align-items-center gap-3 flex-row">
-          <li className="nav-item">
-            <NavLink to="/" className="nav-link">
-              Home
+          <li className="nav-item text-primary">
+            <NavLink to="/admin/dashboard" className="nav-link">
+              Admin
             </NavLink>
           </li>
 
@@ -72,7 +74,7 @@ const Nav = () => {
                 onClick={logInHandler}
                 className="btn btn-outline-primary btn-sm"
               >
-                Sign in
+                Admin login in
               </button>
             </li>
           )}

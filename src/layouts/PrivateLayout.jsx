@@ -1,12 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet, useNavigate } from "react-router";
+import { Link, Outlet, useNavigate } from "react-router";
 import { authSelector } from "../store/auth/selector";
-import Nav from "../pages/public/nav/Nav";
 import { loggedIn, loggedOut } from "../store/auth/actions";
-import { useGetPostLists } from "../query/queryHooks/homeQueries";
-
-import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -25,6 +21,12 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import AnalyticsIcon from "@mui/icons-material/Analytics";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import GroupIcon from "@mui/icons-material/Group";
+import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
+import CompostIcon from "@mui/icons-material/Compost";
 import MailIcon from "@mui/icons-material/Mail";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -57,7 +59,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "flex-end",
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
 
@@ -113,10 +114,11 @@ const PrivateLayout = () => {
   const auth = useSelector(authSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { logout } = useAuth0();
+  const { user, logout, loginWithRedirect, isAuthenticated, isLoading } =
+    useAuth0();
 
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -127,8 +129,16 @@ const PrivateLayout = () => {
   };
 
   useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      loginWithRedirect();
+    }
+  }, [isLoading, isAuthenticated, loginWithRedirect]);
+
+  useEffect(() => {
     const userDetials = JSON.parse(localStorage.getItem("user_details"));
-    if (userDetials) dispatch(loggedIn(userDetials));
+    if (userDetials) {
+      dispatch(loggedIn(userDetials));
+    }
   }, [auth.isLoggedIn]);
 
   const logOutHandler = () => {
@@ -137,13 +147,48 @@ const PrivateLayout = () => {
     logout({ logoutParams: { returnTo: window.location.origin } });
   };
 
+  const handleAdminRoute = (text) => {
+    console.log(auth);
+    console.log(text);
+    navigate(`/admin/${text}`);
+  };
+
+  const getIcons = (text) => {
+    switch (text) {
+      case "dashboard":
+        return <DashboardIcon />;
+      case "post_manager":
+        return <CompostIcon />;
+      case "analytics":
+        return <AnalyticsIcon />;
+      case "location_insights":
+        return <LocationOnIcon />;
+      case "users_list":
+        return <GroupIcon />;
+      case "settings":
+        return <SettingsSuggestIcon />;
+      default:
+        return <DashboardIcon />;
+    }
+  };
+
+  function getTextCapitalized(text) {
+    return text
+      .split("_")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  }
   return (
     <div className="d-flex flex-column min-vh-100">
-      <header className="shadow-sm bg-white sticky-top"></header>
-
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <AppBar position="fixed" open={open}>
+        <AppBar
+          position="fixed"
+          open={open}
+          style={{
+            boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+          }}
+        >
           <Toolbar>
             <IconButton
               color="inherit"
@@ -160,7 +205,7 @@ const PrivateLayout = () => {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap component="div">
-              Dashboard
+              Hello, {user?.nickname?.toUpperCase()}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -176,7 +221,14 @@ const PrivateLayout = () => {
           </DrawerHeader>
           <Divider />
           <List>
-            {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+            {[
+              "dashboard",
+              "post_manager",
+              "analytics",
+              "location_insights",
+              "users_list",
+              "settings",
+            ].map((text, index) => (
               <ListItem key={text} disablePadding sx={{ display: "block" }}>
                 <ListItemButton
                   sx={[
@@ -192,6 +244,7 @@ const PrivateLayout = () => {
                           justifyContent: "center",
                         },
                   ]}
+                  onClick={() => handleAdminRoute(text)}
                 >
                   <ListItemIcon
                     sx={[
@@ -208,10 +261,10 @@ const PrivateLayout = () => {
                           },
                     ]}
                   >
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    {getIcons(text)}
                   </ListItemIcon>
                   <ListItemText
-                    primary={text}
+                    primary={getTextCapitalized(text)}
                     sx={[
                       open
                         ? {
@@ -328,7 +381,7 @@ const PrivateLayout = () => {
             </ListItem>
           </List>
         </Drawer>
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <Box component="main" sx={{ flexGrow: 1 }}>
           <DrawerHeader />
           <main className="flex-grow-1 py-4">
             <div className="container">
